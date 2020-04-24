@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block content %}
+
+<h1 class="text-center">Liste des offres</h1>
+
+<div class="container">
+        <form method="GET">
+            <div class="input-group md-form form-sm form-1 pl-0 mt-3 mb-3">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text cyan lighten-2"><i class="fas fa-search"></i></span>
+                </div>
+                <input class="form-control my-0 py-1" name="search" type="text" placeholder="Recherche..." aria-label="Search">
+            </div>
+        </form>
+    {% if ads %}
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for ad in ads %}
+            <div class="col mb-4">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'worker:detail' id=ad.id %}">{{ ad.title }}</a>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ ad.user }}</h6>
+                <p class="card-text">{{ ad.description }}</p>
+                <a
+                    href="{% url 'worker:detail' id=ad.id %}"
+                    class="card-link"
+                    >En savoir plus</a
+                >
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+            <div class="alert alert-danger text-center" role="alert">
+                Aucune annonces a été trouvé !
+            </div>
+        {% endif %} 
+
+    </div>
+
+{%endblock%}

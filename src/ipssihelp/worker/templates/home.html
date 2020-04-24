@@ -1,0 +1,86 @@
+{% extends "base.html" %} {% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">Bienvenue sur CovidAids !</h1>
+  <p class="lead">
+    Premier outils dedié au partage de service concernant le Covid-19
+  </p>
+  <hr class="my-4" />
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/demand" role="button"
+      >Voir les demandes</a
+    >
+  </p>
+</div>
+
+<div class="container">
+  <div>
+    <h1>Top 5 Annonceurs</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prenom</th>
+          <th scope="col">Nb Annonce</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in topFive %}
+
+        <tr>
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.num_ads}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h1>5 Dernieres demandes</h1>
+    <div class="row row-cols-1 row-cols-md-3">
+      {% for ad in lastDemand %}
+      <div class="col mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'worker:detail' id=ad.id %}">{{ ad.title }}</a>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ ad.user }}</h6>
+            <p class="card-text">{{ ad.description }}</p>
+            <a href="{% url 'worker:detail' id=ad.id %}" class="card-link"
+              >En savoir plus</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+
+  <div>
+    <h1>5 Dernieres Offres</h1>
+    <div class="row row-cols-1 row-cols-md-3">
+      {% for ad in lastSupply %}
+      <div class="col mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'worker:detail' id=ad.id %}">{{ ad.title }}</a>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ ad.user }}</h6>
+            <p class="card-text">{{ ad.description }}</p>
+            <a href="{% url 'worker:detail' id=ad.id %}" class="card-link"
+              >En savoir plus</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

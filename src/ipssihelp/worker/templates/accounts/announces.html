@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 ">
+                <div class="list-group ">
+                    <a href="{% url 'worker:profil' %}" class="list-group-item list-group-item-action">Details</a>
+                    <a href="{% url 'worker:announces' %}" class="list-group-item list-group-item-action active">Mes Annonces</a>
+                    <a href="#" class="list-group-item list-group-item-action">Mes Messages</a>
+                </div> 
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Mes Annonces</h4>
+                                <hr>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Titre</th>
+                                        <th scope="col">Descriptions</th>
+                                        <th scope="col">Categorie</th>
+                                        <th scope="col">Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ad in announces %}
+                                        <tr>
+                                            <td><a href="{% url 'worker:detail' id=ad.id %}">{{ ad.title }}</a></td>
+                                            <td>{{ad.description}}</td>
+                                            <td>{{ad.category}}</td>
+                                            <td>{{ad.status}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

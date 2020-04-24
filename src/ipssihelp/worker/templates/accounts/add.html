@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+
+    
+        <h2 class="text-center">Ajouter une annonce</h2>
+
+        {% if success %}
+            <div class="alert alert-success text-center" role="alert">
+                Votre annonces à bien été ajouté !
+            </div>
+        {% endif %}
+        {% if error %}
+            <div class="alert alert-danger text-center" role="alert">
+                Une erreur est survenue lors de l'ajout
+            </div>
+        {% endif %}
+        <form method="post" class="form-group" id="signup_form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            
+            <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
+        </form>
+    </div>
+{% endblock %}

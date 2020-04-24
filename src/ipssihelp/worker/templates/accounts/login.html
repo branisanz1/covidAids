@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="text-center">Connexion</h2>
+    {% if error %}
+        <div class="alert alert-danger text-center" role="alert">
+            {{error}}
+        </div>
+    {% endif %}
+    <div class="container">
+        <form method="post" class="form-group" id="signup_form">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary">Connexion</button>
+            </form>
+    </div>
+    
+{% endblock %}

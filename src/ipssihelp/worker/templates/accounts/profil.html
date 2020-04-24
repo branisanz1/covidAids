@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 ">
+                <div class="list-group ">
+                    <a href="{% url 'worker:profil' %}" class="list-group-item list-group-item-action active">Details</a>
+                    <a href="{% url 'worker:announces' %}" class="list-group-item list-group-item-action">Mes Annonces</a>
+                    <a href="#" class="list-group-item list-group-item-action">Mes Messages</a>
+                </div> 
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Mon Profil</h4>
+                                <hr>
+                                <table class="table table-bordered">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Nom</th>
+                                            <td>{{user.last_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Prenom</th>
+                                            <td>{{user.first_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td>{{user.email}}</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="post" class="form-group">
+                                    <h3>Modifier vos informations</h3>
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                    <div>
+                                        {{ field.label_tag }}<br>
+                                        {{ field }}
+                                        {% if field.help_text %}
+                                            <small style="color: grey">{{ field.help_text }}</small>
+                                        {% endif %}
+                                        {% for error in field.errors %}
+                                            <p style="color: red">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                    <br>
+                                    <div class="form-group row">
+                                        <button name="submit" type="submit" class="btn btn-primary">Modifier</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if ad %}
+        <div class="container">
+            <h1 class="my-4">{{ad.title}}</h1>
+            <!-- Portfolio Item Row -->
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="my-3">Description de l'annonce : </h3>
+                    <p>{{ad.description}}</p>
+                    <h3 class="my-3">Details</h3>
+                    <ul>
+                        <li>Utilisateur : {{ad.user.first_name | title}}</li>
+                        <li>Categorie : {{ad.category}}</li>
+                        <li>Statut : {{ad.status}}</li>
+                        <li>Créé le {{ad.created}}</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-6">
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Lancer la conversation</button>
+                </form>
+            </div>
+            
+        </div>
+    {% else %}
+        <h2>Oups, pas d'annonce trouvé...</h2>
+    {% endif %}
+{%endblock%}
